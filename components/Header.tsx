@@ -10,7 +10,6 @@ const Header = () => {
 
   const navigation = [
     { name: 'How It Works', href: '/how-it-works' },
-    { name: 'Demo', href: '/demo' },
     { name: 'Pricing', href: '/pricing' },
     { name: 'Contact', href: '/contact' },
   ];
@@ -20,7 +19,7 @@ const Header = () => {
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center">
-            <span className="text-xl font-bold text-primary">LawAssist.AI</span>
+            <span className="text-xl font-bold text-primary">LexiVo</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -35,7 +34,7 @@ const Header = () => {
               </Link>
             ))}
             <Button asChild>
-              <Link href="/demo">Get a Free Demo Call</Link>
+              <Link href="/demo">Try The Demo</Link>
             </Button>
           </div>
 

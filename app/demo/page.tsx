@@ -1,100 +1,45 @@
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Calendar, Phone, MessageSquare } from 'lucide-react';
+import VapiDemo from '@/components/VapiDemo';
 
 export default function Demo() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-b from-gray-50 to-white">
+      <section className="pt-24 pb-12 md:pt-32 md:pb-12 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 mb-6">
               Experience Our AI Assistant in Action
             </h1>
-            <p className="text-xl text-gray-600 mb-8">
-              Schedule a personalized demo to see how our AI voice assistant can transform your law firm's communication.
+            <p className="text-xl text-gray-600 ">
+              Try our AI voice assistant below to see how it can transform your law firm's communication.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Demo Form Section */}
+      {/* Demo Section */}
       <section className="py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-xl mx-auto">
-            <form className="space-y-6">
-              <div className="space-y-4">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                    Full Name
-                  </label>
-                  <Input id="name" placeholder="John Smith" required />
-                </div>
-                
-                <div>
-                  <label htmlFor="firm" className="block text-sm font-medium text-gray-700 mb-1">
-                    Law Firm Name
-                  </label>
-                  <Input id="firm" placeholder="Smith & Associates" required />
-                </div>
-
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                    Email Address
-                  </label>
-                  <Input id="email" type="email" placeholder="john@example.com" required />
-                </div>
-
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-                    Phone Number
-                  </label>
-                  <Input id="phone" type="tel" placeholder="(555) 123-4567" required />
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                    Additional Information
-                  </label>
-                  <Textarea
-                    id="message"
-                    placeholder="Tell us about your current call handling process and challenges..."
-                    className="min-h-[100px]"
-                  />
-                </div>
-              </div>
-
-              <Button type="submit" className="w-full">
-                Schedule Demo
-              </Button>
-            </form>
+          <div className="max-w-2xl mx-auto">
+            <VapiDemo />
           </div>
         </div>
       </section>
 
-      {/* Features Grid */}
+      {/* Additional Information */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-              <div className="p-6">
-                <Calendar className="h-8 w-8 mx-auto mb-4 text-primary" />
-                <h3 className="text-lg font-semibold mb-2">Flexible Scheduling</h3>
-                <p className="text-gray-600">Choose a time that works best for your schedule</p>
-              </div>
-              <div className="p-6">
-                <Phone className="h-8 w-8 mx-auto mb-4 text-primary" />
-                <h3 className="text-lg font-semibold mb-2">Live Demo</h3>
-                <p className="text-gray-600">Experience our AI assistant in real-time</p>
-              </div>
-              <div className="p-6">
-                <MessageSquare className="h-8 w-8 mx-auto mb-4 text-primary" />
-                <h3 className="text-lg font-semibold mb-2">Expert Consultation</h3>
-                <p className="text-gray-600">Get all your questions answered by our team</p>
-              </div>
-            </div>
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl font-bold mb-6">Want a Personalized Demo?</h2>
+            <p className="text-lg text-gray-600 mb-8">
+              Contact us to schedule a personalized demo tailored to your law firm's specific needs.
+            </p>
+            <a 
+              href="/contact" 
+              className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
+            >
+              Contact Us
+            </a>
           </div>
         </div>
       </section>

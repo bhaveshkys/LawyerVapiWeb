@@ -9,8 +9,7 @@ import { Send, X } from 'lucide-react';
 
 export default function VapiDemo() {
   const [status, setStatus] = useState('idle'); // idle, connecting, talking, error, completed
-  // Use the provided call ID for debugging
-  const [callId, setCallId] = useState<string | null>("8dd5c037-cf9f-4ed8-b537-fa6017df7045");
+  const [callId, setCallId] = useState<string | null>(null);
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -44,7 +43,7 @@ export default function VapiDemo() {
       // Start the call with your assistant configuration
       const call = await vapi.start(process.env.NEXT_PUBLIC_VAPI_ASSISTANT_ID,{
         variableValues:{
-            lawfirm:"Hamlin & Mcgill"
+            lawfirm:"Lexivo"
         }
       });
       
@@ -119,7 +118,7 @@ export default function VapiDemo() {
   }, []);
 
   return (
-    <div className="aspect-video bg-white rounded-lg shadow-lg p-8 flex flex-col items-center justify-center relative">
+    <div className="aspect-video bg-white rounded-lg  p-8 flex flex-col items-center justify-center relative">
       {status === 'completed' && (
         <button 
           onClick={resetDemo} 
@@ -132,32 +131,22 @@ export default function VapiDemo() {
       
       <h3 className="text-2xl font-semibold mb-6">Try Our AI Assistant</h3>
       
-      {/* Always show the Vapi button */}
-      <NeumorphicButton 
-        status={status as 'idle' | 'connecting' | 'talking' | 'error'} 
-        onStart={startCall} 
-        onStop={stopCall} 
-      />
+      {/* Only show the Vapi button when not in completed state or after email submission */}
+      {(status !== 'completed' || submitSuccess) && (
+        <NeumorphicButton 
+          status={status as 'idle' | 'connecting' | 'talking' | 'error'} 
+          onStart={startCall} 
+          onStop={stopCall} 
+        />
+      )}
       
-      {/* Temporarily always show the email form for debugging */}
-      <div className="w-full max-w-md mt-8">
-        {submitSuccess ? (
-          <div className="text-center">
-            <div className="mb-4 text-green-600 font-medium">
-              Thank you! We've sent the call details to your email.
-            </div>
-            <Button onClick={() => setSubmitSuccess(false)} className="mt-2">
-              Test again
-            </Button>
-          </div>
-        ) : (
+      {/* Only show email form after call ends and before successful submission */}
+      {status === 'completed' && !submitSuccess && (
+        <div className="w-full max-w-md mt-8">
           <form onSubmit={handleEmailSubmit} className="space-y-4">
             <div className="text-center mb-4">
               <p className="text-gray-700">
                 Would you like to receive a summary and recording of this conversation?
-              </p>
-              <p className="text-xs text-gray-500 mt-1">
-                Using call ID: {callId}
               </p>
             </div>
             <div className="flex space-x-2">
@@ -185,13 +174,25 @@ export default function VapiDemo() {
               </Button>
             </div>
           </form>
-        )}
-      </div>
+        </div>
+      )}
+      
+      {/* Show success message after email submission */}
+      {status === 'completed' && submitSuccess && (
+        <div className="text-center mt-8">
+          <div className="mb-4 text-green-600 font-medium">
+            Thank you! We've sent the call details to your email.
+          </div>
+          <Button onClick={resetDemo} className="mt-2">
+            Start a new conversation
+          </Button>
+        </div>
+      )}
       
       {status !== 'completed' && (
         <p className="mt-6 text-gray-600 text-center max-w-md">
-          Click the button above to start a conversation with our AI legal assistant. 
-          It can answer questions about our services and help schedule consultations.
+          Click the microphone button to speak with our AI receptionist. Try asking about legal services, 
+          describing a potential case, or scheduling a consultation with an attorney.
         </p>
       )}
     </div>
