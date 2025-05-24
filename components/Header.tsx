@@ -19,7 +19,7 @@ const Header = () => {
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center">
-            <span className="text-xl font-bold text-primary">LexiVo</span>
+            <span className="text-xl font-bold text-primary">Lexievo</span>
           </Link>
 
           {/* Desktop Navigation */}

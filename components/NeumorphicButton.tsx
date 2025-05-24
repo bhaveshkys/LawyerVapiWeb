@@ -12,24 +12,10 @@ interface NeumorphicButtonProps {
 
 export default function NeumorphicButton({ status, onStart, onStop }: NeumorphicButtonProps) {
   const [mounted, setMounted] = useState(false);
-  const [animationActive, setAnimationActive] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  // Handle animation state based on status changes
-  useEffect(() => {
-    if (status === 'talking') {
-      setAnimationActive(true);
-    } else {
-      // Add a small delay before stopping animation to allow for a smooth transition
-      const timer = setTimeout(() => {
-        setAnimationActive(false);
-      }, 300);
-      return () => clearTimeout(timer);
-    }
-  }, [status]);
 
   if (!mounted) return null;
 
@@ -41,8 +27,11 @@ export default function NeumorphicButton({ status, onStart, onStop }: Neumorphic
     }
   };
 
+  // Create a status-specific class name
+  const statusClassName = `status_${status}`;
+
   return (
-    <div className={styles.circle}>
+    <div className={`${styles.circle} ${styles[statusClassName]}`}>
       <button 
         className={`${styles.circle__btn} ${status === 'talking' ? styles.shadow : ''}`}
         onClick={handleClick}
@@ -60,8 +49,8 @@ export default function NeumorphicButton({ status, onStart, onStop }: Neumorphic
           {status === 'error' && 'Try Again'}
         </span>
       </button>
-      <span className={`${styles.circle__back_1} ${!animationActive ? styles.paused : ''}`}></span>
-      <span className={`${styles.circle__back_2} ${!animationActive ? styles.paused : ''}`}></span>
+      <span className={styles.circle__back_1}></span>
+      <span className={styles.circle__back_2}></span>
     </div>
   );
 }

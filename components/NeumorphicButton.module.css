@@ -21,14 +21,39 @@
   align-items: center;
   border-radius: 50%;
   font-size: 1rem;
-  color: #6d5dfc;
   z-index: 300;
-  background: #e4ebf5;
   box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, -0.2rem -0.2rem 0.5rem #ffffff;
   cursor: pointer;
   position: relative;
   border: none;
   transition: all 0.2s ease;
+}
+
+/* Default button background (will be overridden by status classes) */
+.circle__btn {
+  background: #e4ebf5;
+  color: #6d5dfc;
+}
+
+/* Status-specific button backgrounds */
+.status_idle .circle__btn {
+  background: #f5f0ff;
+  color: #9d4edd;
+}
+
+.status_connecting .circle__btn {
+  background: #fff8f0;
+  color: #ff9e00;
+}
+
+.status_talking .circle__btn {
+  background: #f0fff8;
+  color: #10b981;
+}
+
+.status_error .circle__btn {
+  background: #fff0f0;
+  color: #ef4444;
 }
 
 .circle__btn:hover {
@@ -37,7 +62,23 @@
 
 .circle__btn.shadow {
   box-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7, inset -0.2rem -0.2rem 0.5rem #ffffff;
-  background: #e4ebf5;
+}
+
+/* Status-specific shadow styles */
+.status_idle .circle__btn.shadow {
+  background: #f0e8ff;
+}
+
+.status_connecting .circle__btn.shadow {
+  background: #fff4e8;
+}
+
+.status_talking .circle__btn.shadow {
+  background: #e8fff4;
+}
+
+.status_error .circle__btn.shadow {
+  background: #ffe8e8;
 }
 
 .buttonText {
@@ -63,14 +104,10 @@
   z-index: 100;
 }
 
+/* Base animation styles */
 .circle__back_1 {
   box-shadow: 0.4rem 0.4rem 0.8rem #c8d0e7, -0.4rem -0.4rem 0.8rem #ffffff;
-  background: linear-gradient(to bottom right, #c8d0e7 0%, #ffffff 100%);
   animation: waves 4s linear infinite;
-}
-
-.circle__back_1.paused {
-  animation-play-state: paused;
 }
 
 .circle__back_2 {
@@ -78,10 +115,43 @@
   animation: waves 4s linear 2s infinite;
 }
 
-.circle__back_2.paused {
-  animation-play-state: paused;
+/* Status-specific colors for animation rings */
+.status_idle .circle__back_1,
+.status_idle .circle__back_2 {
+  background: linear-gradient(to bottom right, #9d4edd 0%, #c77dff 100%);
+  /* Smaller waves for idle state */
+  animation: smallWaves 4s linear infinite;
 }
 
+.status_idle .circle__back_2 {
+  animation: smallWaves 4s linear 2s infinite;
+}
+
+/* Excited animation on hover for idle state */
+.status_idle:hover .circle__back_1 {
+  animation: excitedWaves 2s ease-in-out forwards, smallWaves 4s linear 2s infinite;
+}
+
+.status_idle:hover .circle__back_2 {
+  animation: excitedWaves 2s ease-in-out 0.3s forwards, smallWaves 4s linear 4s infinite;
+}
+
+.status_connecting .circle__back_1,
+.status_connecting .circle__back_2 {
+  background: linear-gradient(to bottom right, #ff9e00 0%, #ffca80 100%);
+}
+
+.status_talking .circle__back_1,
+.status_talking .circle__back_2 {
+  background: linear-gradient(to bottom right, #10b981 0%, #6ee7b7 100%);
+}
+
+.status_error .circle__back_1,
+.status_error .circle__back_2 {
+  background: linear-gradient(to bottom right, #ef4444 0%, #fca5a5 100%);
+}
+
+/* Regular waves animation (for non-idle states) */
 @keyframes waves {
   0% {
     transform: scale(1);
@@ -92,6 +162,37 @@
   }
   100% {
     transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* Smaller waves animation (for idle state) */
+@keyframes smallWaves {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Excited waves animation (for idle state on hover) */
+@keyframes excitedWaves {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  40% {
+    transform: scale(2.2);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
     opacity: 0;
   }
 }

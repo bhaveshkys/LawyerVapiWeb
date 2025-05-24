@@ -1,12 +1,15 @@
 "use client";
-import React from "react";
+import React, { useMemo } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export const BoxesCore = ({ className, ...rest }: { className?: string }) => {
-  const rows = new Array(150).fill(1);
-  const cols = new Array(100).fill(1);
-  let colors = [
+  // Reduce the number of rows and columns but increase the size to maintain visual density
+  const rows = new Array(75).fill(1); // Half the rows
+  const cols = new Array(50).fill(1); // Half the columns
+  
+  // Pre-compute random colors to avoid recalculation
+  const colors = useMemo(() => [
     "#93c5fd",
     "#f9a8d4",
     "#86efac",
@@ -16,11 +19,24 @@ export const BoxesCore = ({ className, ...rest }: { className?: string }) => {
     "#93c5fd",
     "#a5b4fc",
     "#c4b5fd",
-  ];
-  const getRandomColor = () => {
-    return colors[Math.floor(Math.random() * colors.length)];
+  ], []);
+  
+  // Pre-compute random colors for each cell to avoid recalculation during hover
+  const colorMap = useMemo(() => {
+    const map = new Map();
+    for (let i = 0; i < rows.length; i++) {
+      for (let j = 0; j < cols.length; j++) {
+        map.set(`${i}-${j}`, colors[Math.floor(Math.random() * colors.length)]);
+      }
+    }
+    return map;
+  }, [rows.length, cols.length, colors]);
+
+  const getColor = (i: number, j: number) => {
+    return colorMap.get(`${i}-${j}`);
   };
 
+  // Use CSS transform instead of motion.div for non-interactive elements
   return (
     <div
       style={{
@@ -33,21 +49,19 @@ export const BoxesCore = ({ className, ...rest }: { className?: string }) => {
       {...rest}
     >
       {rows.map((_, i) => (
-        <motion.div
+        <div
           key={`row` + i}
-          className="relative h-8 w-16 border-l border-slate-200 "
+          className="relative h-16 w-32 border-l border-slate-200" // Double the size
         >
           {cols.map((_, j) => (
             <motion.div
               whileHover={{
-                backgroundColor: `${getRandomColor()}`,
+                backgroundColor: getColor(i, j),
                 transition: { duration: 0 },
               }}
-              animate={{
-                transition: { duration: 2 },
-              }}
+              // Remove unnecessary animate prop
               key={`col` + j}
-              className="relative h-8 w-16 border-t border-r border-slate-200"
+              className="relative h-16 w-32 border-t border-r border-slate-200" // Double the size
             >
               {j % 2 === 0 && i % 2 === 0 ? (
                 <svg
@@ -67,10 +81,11 @@ export const BoxesCore = ({ className, ...rest }: { className?: string }) => {
               ) : null}
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       ))}
     </div>
   );
 };
 
+// Use React.memo to prevent unnecessary re-renders
 export const Boxes = React.memo(BoxesCore);

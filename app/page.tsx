@@ -74,14 +74,14 @@ export default function Home() {
       </section>
       
       {/* Demo Video Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 relative overflow-visible">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-8">Experience Your New Legal Assistant</h2>
             <p className="text-xl mb-10 text-gray-600">
               Missed calls mean missed client relationships. Our AI assistant ensures you never miss an opportunity while collecting crucial information for your practice.
             </p>
-              <VapiDemo />
+            <VapiDemo />
           </div>
         </div>
       </section>
