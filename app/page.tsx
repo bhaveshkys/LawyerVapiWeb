@@ -11,6 +11,7 @@ import { Phone, Clock, DollarSign, Calendar, Shield, Zap, Users, CheckCircle } f
 import VapiDemo from '@/components/VapiDemo';
 import { Hero } from '@/components/Hero';
 import { HoverEffect } from '@/components/ui/card-hover-effect';
+import { MovingBorder } from '@/components/ui/moving-border';
 
 export default function Home() {
   const benefits = [
@@ -43,15 +44,16 @@ export default function Home() {
       description: 'Understands and responds to nuanced client needs with context-aware conversations.',
     },
     {
-      icon: <Users className="h-6 w-6" />,
-      title: 'Captures Detailed Client Information',
-      description: 'Gathers relevant case details, intake data, and contact info without missing a beat.',
-    },
-    {
       icon: <Calendar className="h-6 w-6" />,
       title: 'Schedules Appointments Instantly',
       description: 'Integrates with your calendar to book consultations in real time — no follow-up needed.',
     },
+    {
+      icon: <Users className="h-6 w-6" />,
+      title: 'Captures Detailed Client Information',
+      description: 'Gathers relevant case details, intake data, and contact info without missing a beat.',
+    },
+    
     {
       icon: <Phone className="h-6 w-6" />,
       title: 'Consistent Brand Voice',
@@ -170,8 +172,20 @@ export default function Home() {
         </div>
       </section>
       {/* AI vs Traditional Services Section */}
-      <section className="py-16 md:py-24 bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-4 md:py-4 relative">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 w-full h-full z-0 opacity-90" 
+          style={{
+            backgroundImage: "url('/images/wavesbg.jpeg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+        {/* Overlay to ensure text readability */}
+        <div className="absolute -inset-0 bg-white/70 z-0"></div>
+        
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-4xl mx-auto text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
               How Our AI Assistant Outperforms Traditional Answering Services
@@ -182,25 +196,66 @@ export default function Home() {
           </div>
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {aiAdvantages.map((advantage, index) => (
-                <div key={index} className="bg-white p-6 rounded-lg shadow-sm border">
-                  <div className="flex items-center mb-4">
-                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mr-4">
-                      <div className="text-primary">{advantage.icon}</div>
+              {aiAdvantages.map((advantage, index) => {
+                // Check if this is one of the cards that should have the moving border
+                const shouldHaveMovingBorder = [
+                  '24/7 Availability',
+                  'Captures Detailed Client Information',
+                  'Handles Complex Legal Inquiries'
+                ].includes(advantage.title);
+                
+                return shouldHaveMovingBorder ? (
+                  // Card with moving border for selected cards
+                  <div key={index} className="relative p-1 rounded-lg overflow-hidden">
+                    <div className="absolute inset-0">
+                      <MovingBorder duration={3000} rx="20%" ry="20%">
+                        <div className="h-28 w-28 bg-[radial-gradient(#0ea5e9_40%,transparent_60%)] opacity-[0.8]" />
+                      </MovingBorder>
                     </div>
-                    <h3 className="text-lg font-semibold">{advantage.title}</h3>
+                    <div className="bg-white p-6 rounded-lg relative z-10 h-full border border-slate-200">
+                      <div className="flex items-center mb-4">
+                        <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mr-4">
+                          <div className="text-primary">{advantage.icon}</div>
+                        </div>
+                        <h3 className="text-lg font-semibold">{advantage.title}</h3>
+                      </div>
+                      <p className="text-gray-600">{advantage.description}</p>
+                    </div>
                   </div>
-                  <p className="text-gray-600">{advantage.description}</p>
-                </div>
-              ))}
+                ) : (
+                  // Regular card for all other advantages
+                  <div key={index} className="bg-white p-6 rounded-lg shadow-sm border-4 border-transparent hover:border-4 hover:border-black">
+                    <div className="flex items-center mb-4">
+                      <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mr-4">
+                        <div className="text-primary">{advantage.icon}</div>
+                      </div>
+                      <h3 className="text-lg font-semibold">{advantage.title}</h3>
+                    </div>
+                    <p className="text-gray-600">{advantage.description}</p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
       </section>
 
       {/* Benefits Section */}
-      <section className="py-16 md:py-24">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-16 md:py-24 relative">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 w-full h-full z-0 opacity-60" 
+          style={{
+            backgroundImage: 'url("/images/lexievoLawFirm.png")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        />
+        {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-white/20 z-0"></div>
+        
+        {/* Content */}
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
             Empower Your Law Firm to Do Its Best Work
           </h2>
@@ -211,8 +266,20 @@ export default function Home() {
       </section>
 
       {/* Implementation Timeline Section */}
-      <section className="py-16 md:py-24 bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-16 md:py-24 relative">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 w-full h-full z-0 opacity-60" 
+          style={{
+            backgroundImage: "url('/images/womaninfrontofscreen.png')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+        {/* Overlay to ensure text readability */}
+        <div className="absolute inset-0 bg-white/50 z-0"></div>
+        
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-4xl mx-auto text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
               How Quickly Can We Implement This Solution?
@@ -239,10 +306,10 @@ export default function Home() {
               ))}
             </div>
             <div className="text-center mt-12">
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              <p className="text-lg text-black max-w-3xl mx-auto">
                 The entire setup requires little to no disruption to your current operations. You don't need to hire staff, learn new software, or overhaul your systems. We handle everything behind the scenes, so you can stay focused on serving your clients.
               </p>
-              <p className="text-lg text-gray-600 mt-4">
+              <p className="text-lg text-black mt-4">
                 Whether you're a solo attorney or a growing firm, we make it easy to scale your communication without delay.
               </p>
             </div>
@@ -251,7 +318,7 @@ export default function Home() {
       </section>
 
       {/* Security Section */}
-      <section className="py-16 md:py-24">
+{/*       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
@@ -283,19 +350,31 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Attorney Escalation Section */}
-      <section className="py-16 md:py-24 bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-16 md:py-24 relative">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 w-full h-full z-0 opacity-60" 
+          style={{
+            backgroundImage: 'url("/images/laptop.png")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        />
+        {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-white/50 z-0"></div>
+        
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-4xl mx-auto text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
               What Happens When a Caller Needs to Speak with an Actual Attorney?
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-black">
               Our AI assistant is designed to enhance—not replace—the human touch where it matters most.
             </p>
-            <p className="text-lg text-gray-600 mt-4">
+            <p className="text-lg text-black mt-4">
               When a caller presents a matter that clearly requires an attorney's direct involvement, the AI is trained to recognize context, urgency, and legal complexity. Here's how it handles those situations with professionalism and precision:
             </p>
           </div>
@@ -307,12 +386,12 @@ export default function Home() {
                     <Phone className="h-5 w-5 text-primary mr-2" />
                     {feature.title}
                   </h3>
-                  <p className="text-gray-600">{feature.description}</p>
+                  <p className="text-black">{feature.description}</p>
                 </div>
               ))}
             </div>
             <div className="text-center mt-12">
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              <p className="text-lg text-black max-w-3xl mx-auto">
                 Ultimately, our AI assistant ensures that routine calls are handled efficiently, while more sensitive or complex matters are quickly directed to the right person — so you never miss a critical conversation or a potential client.
               </p>
             </div>

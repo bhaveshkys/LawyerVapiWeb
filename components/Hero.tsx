@@ -2,9 +2,15 @@
 import React from "react";
 import { Boxes } from "../components/ui/background-boxes";
 import { Button } from '@/components/ui/moving-border';
+import { Playfair_Display } from 'next/font/google';
 
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  weight: ['900'],
+  display: 'swap',
+})
 
 export function Hero() {
   return (
@@ -12,14 +18,14 @@ export function Hero() {
       <div className="absolute inset-0 w-full h-full  z-20  pointer-events-none" />
 
       <Boxes />
-      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-black mb-4 z-20 text-center">
-            Let AI Handle Your Law Firm's Inbound Calls
-          </h1>
+
+      <h1 className="text-4xl md:text-5xl lg:text-6xl font-playfair tracking-tight mb-4 z-20 text-center">
+        Let <span className="text-blue-500">AI</span> Handle Your <span className="text-green-800">Law Firm's</span> <span className="text-orange-500">Inbound Calls</span>
+      </h1>
           <p className="text-xl text-gray-700 mb-2 z-20 text-center">
             We build custom AI voice assistants tailored to your firm — no setup required.
           </p>
           <p className="text-lg text-gray-600 mb-8 z-20 text-center font-medium">
-            AI Receptionists for Law Firms<br />
             Custom-built. No setup. No stress. We handle your calls, so you can focus on cases.
           </p>
           <Button
