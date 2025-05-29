@@ -33,7 +33,7 @@ export default function Contact() {
                     <Mail className="h-6 w-6 text-primary mt-1 mr-4" />
                     <div>
                       <h3 className="font-semibold mb-1">Email</h3>
-                      <p className="text-gray-600">contact@Lexievo.com</p>
+                      <p className="text-gray-600">Info@lexievo.com</p>
                     </div>
                   </div>
                   <div className="flex items-start">
@@ -48,9 +48,7 @@ export default function Contact() {
                     <div>
                       <h3 className="font-semibold mb-1">Office</h3>
                       <p className="text-gray-600">
-                        123 Legal Tech Drive<br />
-                        Suite 100<br />
-                        San Francisco, CA 94105
+                        Earth, Milky Way
                       </p>
                     </div>
                   </div>

@@ -277,7 +277,7 @@ export default function Home() {
           }}
         />
         {/* Overlay to ensure text readability */}
-        <div className="absolute inset-0 bg-white/50 z-0"></div>
+        <div className="absolute inset-0 bg-white/30 z-0"></div>
         
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-4xl mx-auto text-center mb-16">
@@ -306,10 +306,10 @@ export default function Home() {
               ))}
             </div>
             <div className="text-center mt-12">
-              <p className="text-lg text-black max-w-3xl mx-auto">
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
                 The entire setup requires little to no disruption to your current operations. You don't need to hire staff, learn new software, or overhaul your systems. We handle everything behind the scenes, so you can stay focused on serving your clients.
               </p>
-              <p className="text-lg text-black mt-4">
+              <p className="text-lg text-gray-600 mt-4">
                 Whether you're a solo attorney or a growing firm, we make it easy to scale your communication without delay.
               </p>
             </div>
@@ -356,7 +356,7 @@ export default function Home() {
       <section className="py-16 md:py-24 relative">
         {/* Background Image */}
         <div 
-          className="absolute inset-0 w-full h-full z-0 opacity-60" 
+          className="absolute inset-0 w-full h-full z-0 opacity-70" 
           style={{
             backgroundImage: 'url("/images/laptop.png")',
             backgroundSize: 'cover',
@@ -364,17 +364,17 @@ export default function Home() {
           }}
         />
         {/* Overlay for better text readability */}
-        <div className="absolute inset-0 bg-white/50 z-0"></div>
+        <div className="absolute inset-0 bg-white/80 z-0"></div>
         
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-4xl mx-auto text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
               What Happens When a Caller Needs to Speak with an Actual Attorney?
             </h2>
-            <p className="text-xl text-black">
+            <p className="text-xl text-gray-600">
               Our AI assistant is designed to enhance—not replace—the human touch where it matters most.
             </p>
-            <p className="text-lg text-black mt-4">
+            <p className="text-lg text-gray-600 mt-4">
               When a caller presents a matter that clearly requires an attorney's direct involvement, the AI is trained to recognize context, urgency, and legal complexity. Here's how it handles those situations with professionalism and precision:
             </p>
           </div>
@@ -386,12 +386,12 @@ export default function Home() {
                     <Phone className="h-5 w-5 text-primary mr-2" />
                     {feature.title}
                   </h3>
-                  <p className="text-black">{feature.description}</p>
+                  <p className="text-gray-600">{feature.description}</p>
                 </div>
               ))}
             </div>
             <div className="text-center mt-12">
-              <p className="text-lg text-black max-w-3xl mx-auto">
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
                 Ultimately, our AI assistant ensures that routine calls are handled efficiently, while more sensitive or complex matters are quickly directed to the right person — so you never miss a critical conversation or a potential client.
               </p>
             </div>

@@ -6,9 +6,11 @@ export default function Pricing() {
   const plans = [
     {
       name: "Basic",
-      price: "499",
+      price: "999",
+      minutes: "1000",
       description: "Perfect for small law firms",
       features: [
+        "1000 minutes monthly",
         "24/7 Call Handling",
         "Lead Qualification",
         "Basic Appointment Scheduling",
@@ -18,9 +20,11 @@ export default function Pricing() {
     },
     {
       name: "Professional",
-      price: "999",
+      price: "2499",
+      minutes: "3000",
       description: "Ideal for growing practices",
       features: [
+        "3000 minutes monthly",
         "Everything in Basic",
         "Advanced Call Routing",
         "Custom Voice Training",
@@ -31,12 +35,14 @@ export default function Pricing() {
     },
     {
       name: "Enterprise",
-      price: "Custom",
+      price: "4499",
+      minutes: "6000",
       description: "For large law firms",
       features: [
+        "6000 minutes monthly",
         "Everything in Professional",
         "Multiple Phone Lines",
-        "Custom Integration",
+        "Custom Dashboard Access",
         "Dedicated Account Manager",
         "24/7 Priority Support",
         "Monthly Strategy Meetings",
@@ -73,8 +79,9 @@ export default function Pricing() {
                   <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
                   <div className="mb-4">
                     <span className="text-4xl font-bold">${plan.price}</span>
-                    {plan.price !== "Custom" && <span className="text-gray-600">/month</span>}
+                    <span className="text-gray-600">/month</span>
                   </div>
+                  <p className="text-sm text-gray-500 mb-2">{plan.minutes} minutes included</p>
                   <p className="text-gray-600 mb-6">{plan.description}</p>
                   <ul className="space-y-4 mb-8">
                     {plan.features.map((feature, featureIndex) => (
